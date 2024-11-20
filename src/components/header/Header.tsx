@@ -5,7 +5,6 @@ import notifications from "../../assets/images/icons/notifications.svg";
 import user from "../../assets/images/icons/user-profile.svg";
 import arrowLeft from "../../assets/images/icons/arrow-left.svg";
 import { Link } from "react-router-dom";
-import styles from "./header.module.css";
 import maount from "../../assets/images/maountains.webp";
 import sidebatBg from "../../assets/images/sidebar-bg.png";
 const Header: FC = () => {
@@ -17,7 +16,7 @@ const Header: FC = () => {
 
   return (
     <header
-      className={`${styles.mainBg} h-48 sm:h-auto  sm:bg-green sm:py-4 text-white  w-full`}
+      className={` h-48 sm:h-auto  sm:bg-green sm:py-4 text-white  w-full`}
     >
       <img
         src={maount}

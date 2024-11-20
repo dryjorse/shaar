@@ -1,6 +1,5 @@
 import { FC, useState, useRef } from "react";
 import search from "../../assets/images/icons/search-loop.svg";
-import Header from "../../components/header/Header";
 
 const MainPage: FC = () => {
   return (
