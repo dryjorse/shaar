@@ -1,31 +1,14 @@
-import { FC } from "react";
-import backgroundImage from "../../assets/images/background.jpg";
-import { motion } from "framer-motion";
+import { FC, useState } from "react";
+import Languages from "../../components/welcomePage/languages/Languages";
+import Welcome from "../../components/welcomePage/welcome/Welcome";
 
 const WelcomePage: FC = () => {
-  const variants = {
-    initial: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-    moveUp: { y: -50 },
-  };
+  const [level, setLevel] = useState(1);
 
   return (
-    <div
-      className="relative h-screen bg-cover text-white flex justify-center items-center"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <motion.h2
-        // variants={variants}
-        animate={{ opacity: [0, 1, 1], y: [0, 0, -50] }}
-        transition={{
-          delay: 0.5,
-          duration: 2,
-          times: [0, 0.5, 0.5],
-        }}
-        className="font-bold text-[128px] [text-shadow:_1px_1px_9px_rgba(0,0,0,0.5)]"
-      >
-        Hello!
-      </motion.h2>
+    <div className="scroll-none">
+      <Languages isActive={level === 1} setLanguageSetted={() => setLevel(2)} />
+      <Welcome isActive={level === 2} />
     </div>
   );
 };

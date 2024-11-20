@@ -5,6 +5,12 @@ const colors = {
   white: twColors.white,
   black: twColors.black,
   transparent: twColors.transparent,
+  green: "#0D6139",
+  "green-bg": "#009951",
+  "green-white": "#17AE67",
+  "green-black": "#00391E",
+  gray: "#F6F2F2",
+  red: "rgb(201, 56, 56)",
 };
 
 export default {
@@ -45,9 +51,14 @@ export default {
         24: "24px",
       },
       fontFamily: {
-        chillax: "chillax",
+        chillax: "chillax, Montserrat Alternates",
+        montserrat: "Montserrat Alternates",
+        inter: "Inter",
       },
       screens: {
+        gtbdf: { max: "1200px" },
+        btbdf: { max: "1110px" },
+        tbdf: { max: "768px" },
         mb: { min: "412px" },
         smb: { min: "320px" },
       },
