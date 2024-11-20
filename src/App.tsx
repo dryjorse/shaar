@@ -1,12 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import { routes } from "./constants/routes";
+import { routes, routes2 } from "./constants/routes";
 import "./i18n";
+import MainLayout from "./layouts/mainLayout/MainLayout";
 
 function App() {
   return (
     <div className="overflow-hidden">
       <Routes>
-        {routes.map((route) => (
+        <Route path="/" element={<MainLayout />}>
+          {routes.map((route) => (
+            <Route key={route.path} {...route} />
+          ))}
+        </Route>
+        {routes2.map((route) => (
           <Route key={route.path} {...route} />
         ))}
       </Routes>
