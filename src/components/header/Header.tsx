@@ -77,9 +77,9 @@ const Header: FC = () => {
                 <path
                   d="M1.83337 1.75H25.1667M1.83337 10.5H25.1667M1.83337 19.25H25.1667"
                   stroke="#006837"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
