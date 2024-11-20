@@ -6,7 +6,7 @@ const MainPage: FC = () => {
     <>
 
       {/* Поиск */}
-      <div className="max-w-[100vw] border-t-2 rounded-t-[35px] border-white  pt-12 w-full pb-20 bg-white ">
+      <div className="max-w-[100vw] border-t-2 rounded-t-[35px] border-white  pt-12 w-full pb-20 bg-white mt-36 sm:mt-5">
         <div className="container ">
           <form action="" className="mb-8 relative mx-auto  sm:mt-8 ">
             <input

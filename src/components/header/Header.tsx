@@ -16,7 +16,7 @@ const Header: FC = () => {
 
   return (
     <header
-      className={` h-48 sm:h-auto  sm:bg-green sm:py-4 text-white  w-full`}
+      className={` h-48 sm:h-auto  sm:bg-green sm:py-4 text-white  w-full absolute top-0`}
     >
       <img
         src={maount}
