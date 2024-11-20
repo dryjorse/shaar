@@ -5,6 +5,9 @@ const colors = {
   white: twColors.white,
   black: twColors.black,
   transparent: twColors.transparent,
+  green: "#178551",
+  lightGray: "#F4F4F4",
+  borderGray: "#D9D9D9",
 };
 
 export default {

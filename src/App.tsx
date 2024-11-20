@@ -1,17 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import { routes } from "./constants/routes";
-import "./i18n";
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './constants/routes';
 
-function App() {
-  return (
-    <div className="overflow-hidden">
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} {...route} />
-        ))}
-      </Routes>
-    </div>
-  );
-}
+const App = () => {
+  return <RouterProvider router={router} /> ;
+};
 
 export default App;

@@ -7,6 +7,11 @@
   src: url("./assets/fonts/Chillax-Variable.ttf");
 }
 
+.container {
+  margin: 0 auto;
+  padding: 0 8px;
+  max-width: 1330px;
+}
 @layer base {
   * {
     @apply m-0 p-0 box-border;
