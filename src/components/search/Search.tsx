@@ -1,13 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import searchIcon from "../../assets/images/icons/search.svg";
 import voiceIcon from "../../assets/images/icons/voice.svg";
 import VoiceListener from "../voiceListener/VoiceListener";
 import { useAtom } from "jotai";
 import { searchValueAtom } from "../../store/store";
-import { useNavigate } from "react-router-dom";
 
 const Search: FC = () => {
-  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useAtom(searchValueAtom);
   const [isVoiceListening, setIsVoiceListeningAtom] = useState(false);
 

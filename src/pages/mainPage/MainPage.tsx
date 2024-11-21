@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import weatherImage from "../../assets/images/weather.png";
 import airQualityImage from "../../assets/images/air-quality.png";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ import aiQualityService from "../../services/aiQuality.service";
 import { usePlaces } from "../../hooks/queries/usePlaces";
 // @ts-ignore
 import "swiper/css";
+import { useAtom } from "jotai";
+import { buildingsFilterAtom } from "../../store/store";
 
 const MainPage: FC = () => {
   const { data: airInfo } = useQuery({
@@ -17,9 +19,19 @@ const MainPage: FC = () => {
     select: ({ data }) => data,
   });
 
-  console.log(airInfo);
+  const [buildingsFilter] = useAtom(buildingsFilterAtom);
 
-  const { data } = usePlaces();
+  const { data, refetch } = usePlaces({
+    rating: +buildingsFilter.rating,
+    min_price: buildingsFilter.price[0] + "",
+    max_price: buildingsFilter.price[1] + "",
+    category: buildingsFilter.categories.map((elem) => +elem),
+  });
+
+  useEffect(() => {
+    console.log(buildingsFilter);
+    refetch();
+  }, [buildingsFilter]);
 
   const groupPlacesByCategory = (
     places: IPlace[]

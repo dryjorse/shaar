@@ -31,3 +31,9 @@ export interface IPlace {
   images: { id: number; image: string }[];
   categories: ISimpleData[];
 }
+export interface IPlacesParams {
+  rating: number;
+  min_price: string;
+  max_price: string;
+  category: number[];
+}

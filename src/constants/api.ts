@@ -10,7 +10,7 @@ export enum apiConfig {
   Login = "auth/jwt/jwt/create/",
   Refresh = "auth/jwt/jwt/refresh/",
   Categories = "categories/",
-  Places = "places/",
+  Places = "place/places/",
   AirQuality = "air-quality/",
 }
 

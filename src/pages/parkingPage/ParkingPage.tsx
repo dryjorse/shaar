@@ -4,9 +4,7 @@ import {
   LoadScript,
   DrawingManager,
   Marker,
-  Polyline,
   Libraries,
-  DirectionsService,
   DirectionsRenderer,
   Polygon,
 } from "@react-google-maps/api";
