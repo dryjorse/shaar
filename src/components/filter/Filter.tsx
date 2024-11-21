@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { categoriesData } from "../../constants/term.data";
 import filterIcon from "../../assets/images/icons/filter.svg";
 import starIcon from "../../assets/images/icons/star.svg";
 import arrow from "../../assets/images/icons/arrow-green.svg";
@@ -10,6 +9,11 @@ import { buildingsFilterAtom } from "../../store/store";
 import { RatingsType } from "../../types/client.types";
 import Slider from "@mui/material/Slider";
 import { debounce } from "@mui/material";
+import { useClickAway } from "@uidotdev/usehooks";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../../constants/api";
+import placesService from "../../services/places.service";
+import { usePlaces } from "../../hooks/queries/usePlaces";
 
 const ratings: RatingsType[] = [5.0, 4.5, 4.0, 3.5, 3];
 
@@ -18,6 +22,15 @@ const Filter: FC = () => {
   const [buildingFilter, setBuildingFilter] = useAtom(buildingsFilterAtom);
   const [pricesLocal, setPricesLocal] = useState([0, 0]);
   const [radiusLocal, setRadiusLocal] = useState([0, 0]);
+  const ref = useClickAway<HTMLDivElement>(() => setIsFilterOpen(false));
+
+  const {} = usePlaces();
+
+  const { data: categoriesData } = useQuery({
+    queryKey: [queryKeys.Categories],
+    queryFn: () => placesService.getCategories(),
+    select: ({ data }) => data,
+  });
 
   const { categories } = buildingFilter;
 
@@ -67,22 +80,24 @@ const Filter: FC = () => {
               All
             </Link>
           </li>
-          {categoriesData.map((category) => (
-            <li key={category}>
+          {categoriesData?.map((category) => (
+            <li key={category.id}>
               <Link
                 to={`/buildings`}
                 onClick={() =>
                   setBuildingFilter({
                     ...buildingFilter,
-                    categories: [category],
+                    categories: [category.id],
                   })
                 }
                 className={clsx(
                   "rounded-[11px] px-[15px] h-[46px] flex items-center bg-[#E7E7E7] font-bold text-[14px] text-green-2 btn shadow-hidden animate-def hover:translate-y-[-10px]",
-                  { "!bg-green-2 !text-white": categories.includes(category) }
+                  {
+                    "!bg-green-2 !text-white": categories.includes(category.id),
+                  }
                 )}
               >
-                {category}
+                {category.name}
               </Link>
             </li>
           ))}
@@ -99,7 +114,7 @@ const Filter: FC = () => {
             className={clsx(
               "flex btn bg-green-3 rounded-[11px] px-[21px]  py-[14px] shadow-hidden gap-[16px] items-center text-[14px] font-bold !shadow-[1px_1px_20px_rgba(0,0,0,0.5)] hover:!shadow-[1px_1px_20px_rgba(0,0,0,0.5)]",
               {
-                "relative sm:relative": !isFilterOpen, 
+                "relative sm:relative": !isFilterOpen,
                 "absolute top-[-50px] sm:top-0 sm:left-0 left-6 z-20 sm:relative":
                   isFilterOpen,
                 "!bg-white text-green-3": isFilterOpen,
@@ -109,11 +124,11 @@ const Filter: FC = () => {
             {/* Для экрана < sm */}
             <div
               className={clsx(
-                "w-[17px] h-[17px]  bg-white animate-def block sm:hidden", 
+                "w-[17px] h-[17px]  bg-white animate-def block sm:hidden",
                 { "!bg-green-3": isFilterOpen }
               )}
               style={{
-                maskImage: `url(${isFilterOpen ? arrow : filterIcon})`, 
+                maskImage: `url(${isFilterOpen ? arrow : filterIcon})`,
                 maskPosition: "center",
                 maskSize: "cover",
                 maskRepeat: "no-repeat",
@@ -123,11 +138,11 @@ const Filter: FC = () => {
             {/* Для экрана >= sm */}
             <div
               className={clsx(
-                "w-[17px] h-[17px] bg-white animate-def hidden sm:block", 
+                "w-[17px] h-[17px] bg-white animate-def hidden sm:block",
                 { "!bg-green-3": isFilterOpen }
               )}
               style={{
-                maskImage: `url(${filterIcon})`, 
+                maskImage: `url(${filterIcon})`,
                 maskPosition: "center",
                 maskSize: "cover",
                 maskRepeat: "no-repeat",
@@ -137,6 +152,7 @@ const Filter: FC = () => {
           </button>
 
           <div
+            ref={ref}
             className={clsx(
               " absolute z-[10] top-[-80PX] h-[100vh] sm:top-[-15px] right-0 rounded-[15px] pt-24 sm:pt-[114px] pb-[34px] pl-[15px] pr-[17px] sm:max-w-[455px] w-screen bg-white sm:bg-green-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)] opacity-0 pointer-events-none max-h-[0px] animate-def",
               { "max-h-screen opacity-100 pointer-events-auto": isFilterOpen }
@@ -180,25 +196,27 @@ const Filter: FC = () => {
             <div className="my-30 rounded-[25px] pt-10 pb-20 pl-40 pr-50 bg-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)]">
               <h3 className="text-[20px] text-green-3 font-bold">Category</h3>
               <div className="mt-[6px] flex flex-wrap gap-x-[9px] gap-y-[14px]">
-                {categoriesData.map((category) => (
+                {categoriesData?.map((category) => (
                   <button
+                    key={category.id}
                     onClick={() =>
                       setBuildingFilter({
                         ...buildingFilter,
-                        categories: categories.includes(category)
-                          ? categories.filter((ctg) => ctg !== category)
-                          : [...categories, category],
+                        categories: categories.includes(category.id)
+                          ? categories.filter((ctg) => ctg !== category.id)
+                          : [...categories, category.id],
                       })
                     }
                     className={clsx(
                       "rounded-[8px] border-2 border-green-white py-[7px] pl-[12px] pr-20 btn text-[12px] font-bold shadow-hidden text-green-white bg-white",
                       {
-                        "!bg-green-white text-white":
-                          categories.includes(category),
+                        "!bg-green-white text-white": categories.includes(
+                          category.id
+                        ),
                       }
                     )}
                   >
-                    {category}
+                    {category.name}
                   </button>
                 ))}
               </div>

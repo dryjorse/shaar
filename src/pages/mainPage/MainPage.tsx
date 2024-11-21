@@ -1,24 +1,112 @@
 import { FC } from "react";
-import Search from "../../components/search/Search";
-import { useLocation } from "react-router-dom";
-import clsx from "clsx";
-import Filter from "../../components/filter/Filter";
+import weatherImage from "../../assets/images/weather.png";
+import airQualityImage from "../../assets/images/air-quality.png";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../../constants/api";
+import { IPlace } from "../../types/api.types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import aiQualityService from "../../services/aiQuality.service";
+import { usePlaces } from "../../hooks/queries/usePlaces";
+// @ts-ignore
+import "swiper/css";
 
 const MainPage: FC = () => {
-  const { search } = useLocation();
+  const { data: airInfo } = useQuery({
+    queryKey: [queryKeys.AirQuality],
+    queryFn: () => aiQualityService.getInfo(),
+    select: ({ data }) => data,
+  });
 
-  const params: { category: string } = search
-    .slice(1)
-    .split("&")
-    .reduce(
-      (prev, curr) => ({
-        ...prev,
-        [curr.split("=")[0]]: curr.split("=")[1],
-      }),
-      { category: "" }
-    );
+  console.log(airInfo);
 
-  return <div className="relative pt-[130px]"></div>;
+  const { data } = usePlaces();
+
+  const groupPlacesByCategory = (
+    places: IPlace[]
+  ): Record<string, IPlace[]> => {
+    return places?.reduce((acc, place) => {
+      place.categories.forEach((category) => {
+        if (!acc[category.name]) {
+          acc[category.name] = [];
+        }
+        acc[category.name].push(place);
+      });
+      return acc;
+    }, {} as Record<string, IPlace[]>);
+  };
+
+  const allPlaces = groupPlacesByCategory(data!);
+
+  return (
+    <div className="relative pt-50">
+      <div className="container flex gap-10">
+        <div className="flex h-16 relative w-36 sm:w-44 shadow-md rounded-r-2xl">
+          <h3
+            className="bg-[#55B0FF] text-white py-4 px-2 text-2xl sm:text-3xl font-bold rounded-s-xl rounded-r-[150px] z-10 text-gray-800"
+            style={{
+              textShadow:
+                "0px 1px 2px 0px #0000001A, 2px 4px 4px 0px #00000017",
+            }}
+          >
+            °10
+          </h3>
+          <div
+            className="absolute h-16 right-0 w-[80%] rounded-r-2xl"
+            style={{
+              background:
+                "linear-gradient(89.83deg, #1A90F7 0.14%, #1572C3 71.56%, #0F5491 99.86%)",
+            }}
+          >
+            <span>
+              <img src={weatherImage} alt="weather" className="-mt-3 -ms-4" />
+            </span>
+          </div>
+        </div>
+        <div className="flex h-16 relative w-36 sm:w-44 shadow-md rounded-r-2xl">
+          <h3 className=" bg-[#33BC7C] py-4 px-3 text-2xl sm:text-3xl font-bold rounded-s-xl w-[73px] rounded-r-[150px] z-10 text-white [text-shadow:_10px_10px_50px_#000]">
+            322
+          </h3>
+          <div
+            className="absolute h-16 right-0 w-[80%] rounded-r-2xl"
+            style={{
+              background:
+                "linear-gradient(89.99deg, #43BB83 0.01%, #3CA976 17.41%, #2E825A 88.89%, #1E553C 99.99%)",
+            }}
+          >
+            <span>
+              {" "}
+              <img
+                src={airQualityImage}
+                alt="weater icon"
+                className="-mt-6 ms-4 sm:-mt-6 sm:ms-6"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+      {allPlaces &&
+        Object.entries(allPlaces).map(([ctg, places]) => (
+          <div key={ctg} className="container mt-[15px] mb-[19px]">
+            <h3 className="text-[#237B52] font-bold text-[36px]">{ctg}</h3>
+            <Swiper
+              slidesPerView="auto"
+              spaceBetween={14}
+              className="mt-[26px]"
+            >
+              {places.map((place) => (
+                <SwiperSlide className="max-w-[154px] w-full ">
+                  <img
+                    alt="place"
+                    src={place.images?.[0].image}
+                    className="rounded-[25px] h-[157px] object-cover"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        ))}
+    </div>
+  );
 };
 
 export default MainPage;

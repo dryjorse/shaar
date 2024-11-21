@@ -6,7 +6,7 @@ export interface IRegisterForm {
   ava: FileList;
 }
 
-export interface ILoginForm extends Omit<IRegisterForm, "username"> {}
+export interface ILoginForm extends Omit<IRegisterForm, "email"> {}
 export interface INotification {
   message: string;
   isOpen: boolean;
