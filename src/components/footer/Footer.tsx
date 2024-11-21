@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 const Footer: FC = () => {
-  return <footer></footer>;
+  return <footer className="bg-[#178551]"></footer>;
 };
 
 export default Footer;

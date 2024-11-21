@@ -6,12 +6,28 @@ export interface IUser {
   username: string;
 }
 export interface IAuthResponse {
-  user: IUser;
-  tokens: {
-    access: string;
-    refresh: string;
-  };
+  access: string;
+  refresh: string;
 }
 export interface IRegisterBody extends Omit<IRegisterForm, "ava"> {
   ava: File;
+}
+export interface ISimpleData {
+  id: number;
+  name: string;
+}
+export interface IPlace {
+  id: number;
+  name: string;
+  avg_price: number;
+  avg_rating: number;
+  coordinates_x: number;
+  corrdinates_y: number;
+  description: string;
+  phone: string;
+  whatsapp: string;
+  instagram: string;
+  address: string;
+  images: { id: number; image: string }[];
+  categories: ISimpleData[];
 }

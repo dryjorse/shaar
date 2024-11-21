@@ -15,3 +15,5 @@ export const buildingsFilterAtom = atom<IBuildingsFilter>({
   price: [0, 0],
   radius: [0, 0],
 });
+
+export const searchValueAtom = atom("");

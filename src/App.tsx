@@ -12,10 +12,10 @@ import "./i18n";
 import MapLayout from "./layouts/mapLayout/MapLayout";
 
 function App() {
-  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
-  const [isLoading, setIsLoading] = useState(true);
+  const [_, setIsAuth] = useAtom(isAuthAtom);
+  const [__, setIsLoading] = useState(true);
 
-  const { mutate: refresh, isPending } = useMutation({
+  const { mutate: refresh } = useMutation({
     mutationFn: authService.refresh,
     onSuccess: ({ data }) => {
       localStorage.setItem("shaar-access-token", data.access);

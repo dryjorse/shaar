@@ -1,5 +1,11 @@
+import { $api } from "../constants/api";
+
 class MapService {
-    getAll() {}
+  getByText(text: string) {
+    return $api(
+      `https://nominatim.openstreetmap.org/search?q=${text}&countrycodes=kg&format=json`
+    );
+  }
 }
 
 export default new MapService();

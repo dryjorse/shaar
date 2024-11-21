@@ -6,17 +6,19 @@ export const $api = axios.create({ baseURL: API_URL });
 export const $apiPrivate = axios.create({ baseURL: API_URL });
 
 export enum apiConfig {
-  Register = "auth/jwt/register/",
-  Login = "auth/jwt/login/",
-  Refresh = "auth/jwt/refresh/",
+  Register = "auth/users/",
+  Login = "auth/jwt/jwt/create/",
+  Refresh = "auth/jwt/jwt/refresh/",
+  Categories = "categories/",
+  Places = "places/",
+  AirQuality = "air-quality/",
 }
 
 export enum queryKeys {
-  About = "about",
-  Gallery = "gallery",
-  Order = "order",
-  Stages = "stages",
-  Links = "links",
+  MapText = "map-text",
+  Categories = "categories",
+  Places = "places",
+  AirQuality = "air-quality",
 }
 
 $apiPrivate.interceptors.request.use((config) => {

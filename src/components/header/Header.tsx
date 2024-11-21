@@ -369,25 +369,19 @@ const Header: FC = () => {
             />
           </Link>
           <Link to={"/"}>
-            <img
-              src={searchNav}
-              alt="nav icon"
-              className="max-w-9"
-            />
+            <img src={searchNav} alt="nav icon" className="max-w-9" />
           </Link>
           <Link to={"/"}>
-            <img
-              src={qrNavbar}
-              alt="nav icon"
-              className="max-w-9"
-            />
+            <img src={qrNavbar} alt="nav icon" className="max-w-9" />
           </Link>
           <Link to={"/map"}>
             <img
               src={mapNavbar}
               alt="nav icon"
               className={`max-w-9 ${
-                location.pathname === "/map" ? "border-b-4 border-[#149659]" : ""
+                location.pathname === "/map"
+                  ? "border-b-4 border-[#149659]"
+                  : ""
               }`}
             />
           </Link>
@@ -396,7 +390,9 @@ const Header: FC = () => {
               src={parkingNav}
               alt="nav icon"
               className={`w-9 ${
-                location.pathname === "/parking" ? "border-b-4 border-[#149659]" : ""
+                location.pathname === "/parking"
+                  ? "border-b-4 border-[#149659]"
+                  : ""
               }`}
             />
           </Link>

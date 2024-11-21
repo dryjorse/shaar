@@ -12,7 +12,7 @@ import BuildingsPage from "../pages/buildingsPage/BuildingsPage";
 
 export const routes = [
   { path: "/", element: <MainPage />, label: "home" },
-  { path: "/buildings", element: <BuildingsPage />, label: "parking" },
+  { path: "/buildings", element: <BuildingsPage /> },
   {
     path: "/favourites",
     element: <FavouritesPage />,

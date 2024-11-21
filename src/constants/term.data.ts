@@ -8,3 +8,5 @@ export const categoriesData = [
   "Schools",
   "Hospitals",
 ];
+
+export const tours = [{ price: "50 som" }];

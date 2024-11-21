@@ -15,7 +15,7 @@ import { useAtom } from "jotai";
 import { isAuthAtom, notificationAtom } from "../../store/store";
 import { useTranslation } from "react-i18next";
 import avaDefaultImage from "../../assets/images/ava-default.png";
-import { saveTokens, urlToFile } from "../../constants/helpers";
+import { urlToFile } from "../../constants/helpers";
 
 const RegisterPage: FC = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const RegisterPage: FC = () => {
   } = useForm<IRegisterForm>({ mode: "onTouched" });
   const { t } = useTranslation();
   const [_, setNotification] = useAtom(notificationAtom);
-  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
+  const [isAuth] = useAtom(isAuthAtom);
 
   const { mutate: registerUser, isPending } = useMutation({
     mutationFn: authService.register,
@@ -39,20 +39,14 @@ const RegisterPage: FC = () => {
         type: "loading",
       });
     },
-    onSuccess: ({
-      data: {
-        tokens: { access, refresh },
-      },
-    }) => {
-      saveTokens(access, refresh);
-      setIsAuth(true);
+    onSuccess: () => {
       setNotification({
         message: t("order.success"),
         isOpen: true,
         isAutoClose: true,
         type: "success",
       });
-      navigate("/");
+      navigate("/login");
     },
   });
 
@@ -84,7 +78,9 @@ const RegisterPage: FC = () => {
         <button onClick={() => navigate(-1)} className="max-w-6 md:max-w-full">
           <img src={arrowIcon} alt="arrow" />
         </button>
-        <h1 className="text-4xl md:text-[64px] font-bold uppercase ">Sign Up</h1>
+        <h1 className="text-4xl md:text-[64px] font-bold uppercase ">
+          Sign Up
+        </h1>
         <div></div>
       </div>
       <div className="sm:mt-24 md:mt-90 rounded-[40px_40px_0_0] md:rounded-[100px_100px_0_0] pt-[62px] bg-gray h-full mt-16">
@@ -102,7 +98,11 @@ const RegisterPage: FC = () => {
                     className="w-full h-full object-cover rounded-circle max-w-32 max-h-32 mx-auto sm:max-w-36 sm:max-h-36 md:max-w-60 md:max-h-60 lg:max-w-none lg:max-h-none"
                   />
                 ) : (
-                  <img src={cameraIcon} alt="camera" className="max-w-32  md:max-w-72 md:w-56 lg:max-w-none sm:max-w-36 bg-white rounded-full lg:w-80 mx-auto"/>
+                  <img
+                    src={cameraIcon}
+                    alt="camera"
+                    className="max-w-32  md:max-w-72 md:w-56 lg:max-w-none sm:max-w-36 bg-white rounded-full lg:w-80 mx-auto"
+                  />
                 )}
                 <input
                   id="ava"
