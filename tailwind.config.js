@@ -9,6 +9,8 @@ const colors = {
   "green-bg": "#009951",
   "green-white": "#17AE67",
   "green-black": "#00391E",
+  "green-2": "#2C9765",
+  "green-3": "#149659",
   gray: "#F6F2F2",
   "gray-bg": "#F0F0F0",
   red: "rgb(201, 56, 56)",

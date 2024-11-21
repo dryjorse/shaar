@@ -29,6 +29,9 @@
   .scroll-none::-webkit-scrollbar {
     @apply w-[0px];
   }
+  .shadow-hidden {
+    @apply !shadow-none hover:!shadow-none;
+  }
 }
 
 @layer components {

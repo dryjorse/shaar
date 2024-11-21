@@ -4,7 +4,7 @@ import bgImage from "../../assets/images/background.jpg";
 import Input from "../../components/ui/input/Input";
 import profileIcon from "../../assets/images/icons/profile-green.svg";
 import arrowIcon from "../../assets/images/icons/arrow-green.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ILoginForm } from "../../types/client.types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
     formState: { errors, isValid },
   } = useForm<ILoginForm>({ mode: "onTouched" });
   const [_, setNotification] = useAtom(notificationAtom);
-  const [__, setIsAuth] = useAtom(isAuthAtom);
+  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
   const { t } = useTranslation();
 
   const { mutate: login, isPending } = useMutation({
@@ -55,6 +55,8 @@ const LoginPage: FC = () => {
   const loginFunc: SubmitHandler<ILoginForm> = (data) => {
     login(data);
   };
+
+  if (isAuth) return <Navigate to="/" />;
 
   return (
     <div className="flex h-screen">

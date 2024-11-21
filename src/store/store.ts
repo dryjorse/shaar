@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { INotification } from "../types/client.types";
+import { IBuildingsFilter, INotification } from "../types/client.types";
 
 export const notificationAtom = atom<INotification>({
   message: "",
@@ -8,3 +8,10 @@ export const notificationAtom = atom<INotification>({
   type: "loading",
 });
 export const isAuthAtom = atom(false);
+
+export const buildingsFilterAtom = atom<IBuildingsFilter>({
+  categories: [],
+  rating: "all",
+  price: [0, 0],
+  radius: [0, 0],
+});
