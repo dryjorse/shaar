@@ -1,11 +1,8 @@
 import { FC, useEffect } from "react";
 import weatherImage from "../../assets/images/weather.png";
 import airQualityImage from "../../assets/images/air-quality.png";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "../../constants/api";
 import { IPlace } from "../../types/api.types";
 import { Swiper, SwiperSlide } from "swiper/react";
-import aiQualityService from "../../services/aiQuality.service";
 import { usePlaces } from "../../hooks/queries/usePlaces";
 // @ts-ignore
 import "swiper/css";
@@ -13,11 +10,11 @@ import { useAtom } from "jotai";
 import { buildingsFilterAtom } from "../../store/store";
 
 const MainPage: FC = () => {
-  const { data: airInfo } = useQuery({
-    queryKey: [queryKeys.AirQuality],
-    queryFn: () => aiQualityService.getInfo(),
-    select: ({ data }) => data,
-  });
+  // const { data: airInfo } = useQuery({
+  //   queryKey: [queryKeys.AirQuality],
+  //   queryFn: () => aiQualityService.getInfo(),
+  //   select: ({ data }) => data,
+  // });
 
   const [buildingsFilter] = useAtom(buildingsFilterAtom);
 
