@@ -9,6 +9,7 @@ import { buildingsFilterAtom } from "../../store/store";
 import { RatingsType } from "../../types/client.types";
 import Slider from "@mui/material/Slider";
 import { debounce } from "@mui/material";
+import { useClickAway } from "@uidotdev/usehooks";
 
 const ratings: RatingsType[] = [5.0, 4.5, 4.0, 3.5, 3];
 
@@ -17,6 +18,7 @@ const Filter: FC = () => {
   const [buildingFilter, setBuildingFilter] = useAtom(buildingsFilterAtom);
   const [pricesLocal, setPricesLocal] = useState([0, 0]);
   const [radiusLocal, setRadiusLocal] = useState([0, 0]);
+  const ref = useClickAway<HTMLDivElement>(() => setIsFilterOpen(false));
 
   const { categories } = buildingFilter;
 
@@ -108,6 +110,7 @@ const Filter: FC = () => {
             <span>Filter</span>
           </button>
           <div
+            ref={ref}
             className={clsx(
               "absolute z-[1] top-[-15px] right-[-47px] rounded-[15px] pt-[114px] pb-[34px] pl-[15px] pr-[17px] max-w-[455px] w-screen bg-green-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)] opacity-0 pointer-events-none max-h-[0px] animate-def",
               { "max-h-screen opacity-100 pointer-events-auto": isFilterOpen }
@@ -153,6 +156,7 @@ const Filter: FC = () => {
               <div className="mt-[6px] flex flex-wrap gap-x-[9px] gap-y-[14px]">
                 {categoriesData.map((category) => (
                   <button
+                    key={category}
                     onClick={() =>
                       setBuildingFilter({
                         ...buildingFilter,
