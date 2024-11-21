@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { categoriesData } from "../../constants/term.data";
 import filterIcon from "../../assets/images/icons/filter.svg";
 import starIcon from "../../assets/images/icons/star.svg";
+import arrow from "../../assets/images/icons/arrow-green.svg";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { buildingsFilterAtom } from "../../store/store";
@@ -49,8 +50,8 @@ const Filter: FC = () => {
   return (
     <>
       <div className="mx-[32px] mb-[15px] w-full h-[1px] bg-[#D9D9D9]"></div>
-      <div className="container flex justify-between items-center">
-        <ul className="flex gap-[12px]">
+      <div className="sm:container flex flex-col gap-y-3 sm:gap-y-0 sm:flex-row justify-between items-center ">
+        <ul className="sm:flex-wrap lg:flex-nowrap max-w-[100vw] mx-2  gap-[12px]  flex overflow-x-scroll sm:overflow-hidden">
           <li>
             <Link
               to="/"
@@ -88,37 +89,65 @@ const Filter: FC = () => {
             </li>
           ))}
         </ul>
-        <div className="relative">
+        <div className="sm:relative pe-7 sm:mt-0 mt-5 ms-auto ">
+          {isFilterOpen && (
+            <h3 className="z-20 absolute top-[-40px] left-1/2 transform -translate-x-1/2 sm:hidden text-[#149659] font-bold text-2xl">
+              Filter
+            </h3>
+          )}
+
           <button
             onClick={() => setIsFilterOpen((prev) => !prev)}
             className={clsx(
-              "relative btn bg-green-3 rounded-[11px] px-[21px] py-[14px] shadow-hidden flex gap-[16px] items-center text-[14px] font-bold z-[5] !shadow-[1px_1px_20px_rgba(0,0,0,0.5)] hover:!shadow-[1px_1px_20px_rgba(0,0,0,0.5)]",
-              { "!bg-white text-green-3": isFilterOpen }
+              "flex btn bg-green-3 rounded-[11px] px-[21px]  py-[14px] shadow-hidden gap-[16px] items-center text-[14px] font-bold !shadow-[1px_1px_20px_rgba(0,0,0,0.5)] hover:!shadow-[1px_1px_20px_rgba(0,0,0,0.5)]",
+              {
+                "relative sm:relative": !isFilterOpen, 
+                "absolute top-[-50px] sm:top-0 sm:left-0 left-6 z-20 sm:relative":
+                  isFilterOpen,
+                "!bg-white text-green-3": isFilterOpen,
+              }
             )}
           >
+            {/* Для экрана < sm */}
             <div
-              className={clsx("w-[17px] h-[17px] bg-white animate-def", {
-                "!bg-green-3": isFilterOpen,
-              })}
+              className={clsx(
+                "w-[17px] h-[17px]  bg-white animate-def block sm:hidden", 
+                { "!bg-green-3": isFilterOpen }
+              )}
               style={{
-                maskImage: `url(${filterIcon})`,
+                maskImage: `url(${isFilterOpen ? arrow : filterIcon})`, 
                 maskPosition: "center",
                 maskSize: "cover",
                 maskRepeat: "no-repeat",
               }}
             ></div>
-            <span>Filter</span>
+
+            {/* Для экрана >= sm */}
+            <div
+              className={clsx(
+                "w-[17px] h-[17px] bg-white animate-def hidden sm:block", 
+                { "!bg-green-3": isFilterOpen }
+              )}
+              style={{
+                maskImage: `url(${filterIcon})`, 
+                maskPosition: "center",
+                maskSize: "cover",
+                maskRepeat: "no-repeat",
+              }}
+            ></div>
+            <span className="sm:block hidden">Filter</span>
           </button>
+
           <div
             ref={ref}
             className={clsx(
-              "absolute z-[1] top-[-15px] right-[-47px] rounded-[15px] pt-[114px] pb-[34px] pl-[15px] pr-[17px] max-w-[455px] w-screen bg-green-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)] opacity-0 pointer-events-none max-h-[0px] animate-def",
+              " absolute z-[10] top-[-80PX] h-[100vh] sm:top-[-15px] right-0 rounded-[15px] pt-24 sm:pt-[114px] pb-[34px] pl-[15px] pr-[17px] sm:max-w-[455px] w-screen bg-white sm:bg-green-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)] opacity-0 pointer-events-none max-h-[0px] animate-def",
               { "max-h-screen opacity-100 pointer-events-auto": isFilterOpen }
             )}
           >
-            <div className="rounded-[25px] pt-10 pb-20 pl-40 pr-50 bg-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)]">
+            <div className=" rounded-[25px] pt-10 pb-20 pl-20 sm:pl-40 pr-50 bg-white shadow-[1px_1px_30px_rgba(0,0,0,0.5)]">
               <h3 className="text-[20px] text-green-3 font-bold">Rating</h3>
-              <div className="mt-[6px] flex gap-[10px]">
+              <div className="mt-[6px] flex gap-[10px] flex-wrap">
                 {ratings.map((rating) => (
                   <button
                     key={rating}
@@ -133,7 +162,7 @@ const Filter: FC = () => {
                       }
                     )}
                   >
-                    <span>{rating}+</span>
+                    <span className="max-w-6">{rating}+</span>
                     <img src={starIcon} alt="star" />
                   </button>
                 ))}
