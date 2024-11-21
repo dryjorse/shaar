@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { routes, routes2 } from "./constants/routes";
+import { routes, routes2, routes3 } from "./constants/routes";
 import MainLayout from "./layouts/mainLayout/MainLayout";
 import Notification from "./components/ui/notification/Notification";
 import { useMutation } from "@tanstack/react-query";
@@ -9,12 +9,13 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import "./i18n";
+import MapLayout from "./layouts/mapLayouts/MapLayout";
 
 function App() {
-  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
-  const [isLoading, setIsLoading] = useState(true);
+  const [_, setIsAuth] = useAtom(isAuthAtom);
+  const [__, setIsLoading] = useState(true);
 
-  const { mutate: refresh, isPending } = useMutation({
+  const { mutate: refresh } = useMutation({
     mutationFn: authService.refresh,
     onSuccess: ({ data }) => {
       localStorage.setItem("shaar-access-token", data.access);
@@ -37,6 +38,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {routes.map((route) => (
+            <Route key={route.path} {...route} />
+          ))}
+        </Route>
+        <Route path="/" element={<MapLayout />}>
+          {routes3.map((route) => (
             <Route key={route.path} {...route} />
           ))}
         </Route>
