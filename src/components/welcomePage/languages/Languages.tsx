@@ -72,7 +72,7 @@ const Languages: FC<Props> = ({ isActive, setLanguageSetted }) => {
                 alt="kg"
                 className="w-[127px] h-[117px] btbdf:w-[70px] btbdf:h-[70px]"
               />
-              <span className="block mx-auto">{label}</span>
+              <span className="block mx-auto sm:text-xl md:text-2xl lg:text-3xl text-xl md:text-">{label}</span>
             </button>
           ))}
         </div>

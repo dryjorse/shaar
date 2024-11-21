@@ -79,28 +79,28 @@ const RegisterPage: FC = () => {
       className=" py-[37px] h-screen text-white"
     >
       <div className="container max-w-[1320px] flex justify-between items-center">
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => navigate(-1)} className="max-w-6 md:max-w-full">
           <img src={arrowIcon} alt="arrow" />
         </button>
-        <h1 className="text-[64px] font-bold uppercase">Sign Up</h1>
+        <h1 className="text-4xl md:text-[64px] font-bold uppercase ">Sign Up</h1>
         <div></div>
       </div>
-      <div className="mt-90 rounded-[100px_100px_0_0] pt-[62px] bg-gray h-full">
+      <div className="sm:mt-24 md:mt-90 rounded-[40px_40px_0_0] md:rounded-[100px_100px_0_0] pt-[62px] bg-gray h-full mt-16">
         <div className="container">
-          <div className="flex justify-between text-center">
-            <div>
+          <div className="flex justify-center md:justify-between md:items-stretch items-center text-center flex-col md:flex-row">
+            <div className="-mt-32 md:mt-0  flex-col flex justify-center items-center md:mb-0 mb-9">
               <label
                 htmlFor="ava"
-                className="rounded-circle overflow-hidden block mb-80 w-[350px] h-[350px]"
+                className=" overflow-hidden   md:mb-70  h-[350px] lg:max-h-none md:max-w-72 md:max-h-72 lg:max-w-none w-full sm:max-w-36  max-h-36"
               >
                 {watch("ava")?.[0] ? (
                   <img
                     alt="ava"
                     src={URL.createObjectURL(watch("ava")[0])}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-circle max-w-32 max-h-32 mx-auto sm:max-w-36 sm:max-h-36 md:max-w-60 md:max-h-60 lg:max-w-none lg:max-h-none"
                   />
                 ) : (
-                  <img src={cameraIcon} alt="camera" />
+                  <img src={cameraIcon} alt="camera" className="max-w-32  md:max-w-72 md:w-56 lg:max-w-none sm:max-w-36 bg-white rounded-full lg:w-80 mx-auto"/>
                 )}
                 <input
                   id="ava"
@@ -110,11 +110,11 @@ const RegisterPage: FC = () => {
                   {...register("ava")}
                 />
               </label>
-              <span className="text-[#AFAFAF] text-[32px]">
+              <span className="text-[#AFAFAF] lg:text-[32px] md:text-[28px] text-16">
                 Add your profile photo
               </span>
             </div>
-            <div className="flex-[0_1_550px]">
+            <div className="flex-[0_1_250px] md:flex-[0_1_550px] mx-3">
               <Input
                 icon={emailIcon}
                 type="email"
@@ -142,6 +142,7 @@ const RegisterPage: FC = () => {
                 isPassword
                 icon={passwordIcon}
                 placeholder="your password"
+                className=""
                 error={errors.password}
                 {...register("password", {
                   required: "Поле не может быть пустым",
@@ -157,8 +158,8 @@ const RegisterPage: FC = () => {
               </button>
             </div>
           </div>
-          <div className="mt-[96px]">
-            <span className="text-[27px] text-green-white">
+          <div className="md:mt-[96px] md:text-[27px] text-18 text-center md:text-start max-w-64 md:max-w-none mx-auto mt-5 ">
+            <span className=" text-green-white">
               Already have an account?{" "}
               <Link to="/login" className="font-bold">
                 Sign in
