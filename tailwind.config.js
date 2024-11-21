@@ -10,6 +10,7 @@ const colors = {
   "green-white": "#17AE67",
   "green-black": "#00391E",
   gray: "#F6F2F2",
+  "gray-bg": "#F0F0F0",
   red: "rgb(201, 56, 56)",
 };
 
@@ -53,7 +54,7 @@ export default {
       fontFamily: {
         chillax: "chillax, Montserrat Alternates",
         montserrat: "Montserrat Alternates",
-        inter: "Inter",
+        comfortaa: "Comfortaa",
       },
       screens: {
         gtbdf: { max: "1200px" },

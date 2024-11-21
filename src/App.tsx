@@ -1,11 +1,40 @@
 import { Route, Routes } from "react-router-dom";
 import { routes, routes2 } from "./constants/routes";
-import "./i18n";
 import MainLayout from "./layouts/mainLayout/MainLayout";
+import Notification from "./components/ui/notification/Notification";
+import { useMutation } from "@tanstack/react-query";
+import authService from "./services/auth.service";
+import { isAuthAtom } from "./store/store";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
+import Cookies
+ from "js-cookie";
+import "./i18n";
 
 function App() {
+  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { mutate: refresh, isPending } = useMutation({
+    mutationFn: authService.refresh,
+    onSuccess: ({ data }) => {
+      localStorage.setItem("mbr-access-token", data.access);
+      setIsAuth(true);
+    },
+    onSettled: () => setIsLoading(false),
+  });
+
+  useEffect(() => {
+    const refreshToken = Cookies.get("mbr-refresh-token");
+
+    if (refreshToken) {
+      refresh(refreshToken);
+    } else setIsLoading(false);
+  }, []);
+
   return (
     <div className="overflow-hidden">
+      <Notification />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {routes.map((route) => (

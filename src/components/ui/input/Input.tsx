@@ -39,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
         <img
           src={icon}
           alt="input"
-          className="rounded-circle w-[75px] h-[75px]"
+          className="w-[75px] h-[75px]"
         />
         <input
           ref={ref}

@@ -6,16 +6,55 @@ import profileIcon from "../../assets/images/icons/profile-green.svg";
 import arrowIcon from "../../assets/images/icons/arrow-green.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { ILoginForm } from "../../types/client.types";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import authService from "../../services/auth.service";
+import { useAtom } from "jotai";
+import { isAuthAtom, notificationAtom } from "../../store/store";
+import { useTranslation } from "react-i18next";
+import { saveTokens } from "../../constants/helpers";
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<ILoginForm>({ mode: "onTouched" });
+  const [_, setNotification] = useAtom(notificationAtom);
+  const [__, setIsAuth] = useAtom(isAuthAtom);
+  const { t } = useTranslation();
+
+  const { mutate: login, isPending } = useMutation({
+    mutationFn: authService.login,
+    onMutate: () => {
+      setNotification({
+        message: t("loading"),
+        isOpen: true,
+        isAutoClose: false,
+        type: "loading",
+      });
+    },
+    onSuccess: ({
+      data: {
+        tokens: { access, refresh },
+      },
+    }) => {
+      saveTokens(access, refresh);
+      setIsAuth(true);
+      setNotification({
+        message: t("order.success"),
+        isOpen: true,
+        isAutoClose: true,
+        type: "success",
+      });
+      navigate("/");
+    },
+  });
+
+  const loginFunc: SubmitHandler<ILoginForm> = (data) => {
+    login(data);
+  };
 
   return (
     <div className="flex h-screen">
@@ -62,7 +101,8 @@ const LoginPage: FC = () => {
             })}
           />
           <button
-            disabled={!isValid}
+            disabled={!isValid || isPending}
+            onClick={handleSubmit(loginFunc)}
             className="btn mt-[132px] mb-[27px] rounded-[43px] px-[102px] py-[18px] bg-white text-green-white font-bold text-[40px]"
           >
             Sign In

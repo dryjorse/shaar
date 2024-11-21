@@ -7,7 +7,9 @@ const MainLayout: FC = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <main className="min-h-[calc(100vh-61px)] bg-gray-bg">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
