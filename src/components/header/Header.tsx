@@ -1,15 +1,21 @@
 import { FC, Fragment, SetStateAction, useState } from "react";
 import logoIcon from "../../assets/images/icons/logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { routes } from "../../constants/routes";
 import arrow from "../../assets/images/icons/arrow.svg";
 import sidebarBg from "../../assets/images/icons/sidebar-bg.svg";
 import kgIcon from "../../assets/images/icons/kg.svg";
 import ruIcon from "../../assets/images/icons/ru.svg";
 import enIcon from "../../assets/images/icons/en.svg";
+import home from "../../assets/images/icons/home.svg";
+import searchNav from "../../assets/images/icons/search-navbar.svg";
+import qrNavbar from "../../assets/images/icons/qrScan.svg";
+import mapNavbar from "../../assets/images/icons/map-navbar.svg";
+import parkingNav from "../../assets/images/icons/park-navbar.svg";
 
 const Header: FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuVisible((prevVisible) => !prevVisible);
@@ -123,7 +129,7 @@ const Header: FC = () => {
         alt="logo"
         className="min-w-24 sm:hidden flex ms-auto me-auto"
       />
-      <div className="relativ me-4 sm:hidden">
+      <div className="relative me-4 sm:hidden">
         <img
           src={selectedImage}
           alt="Selected"
@@ -349,6 +355,52 @@ const Header: FC = () => {
           </Link>
         </div>
       </div>
+
+      <nav className="h-20 fixed bottom-0 left-0 w-full bg-white z-20 text-black sm:hidden">
+        <div className=" flex  justify-between mx-4 mt-6 ">
+          <Link to={"/"}>
+            <img
+              src={home}
+              alt="nav icon"
+              className={`w-8 ${
+                location.pathname === "/" ? "border-b-4 border-[#149659]" : ""
+              }`}
+            />
+          </Link>
+          <Link to={"/"}>
+            <img
+              src={searchNav}
+              alt="nav icon"
+              className="max-w-9"
+            />
+          </Link>
+          <Link to={"/"}>
+            <img
+              src={qrNavbar}
+              alt="nav icon"
+              className="max-w-9"
+            />
+          </Link>
+          <Link to={"/map"}>
+            <img
+              src={mapNavbar}
+              alt="nav icon"
+              className={`max-w-9 ${
+                location.pathname === "/map" ? "border-b-4 border-[#149659]" : ""
+              }`}
+            />
+          </Link>
+          <Link to={"/parking"}>
+            <img
+              src={parkingNav}
+              alt="nav icon"
+              className={`w-9 ${
+                location.pathname === "/parking" ? "border-b-4 border-[#149659]" : ""
+              }`}
+            />
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 };
