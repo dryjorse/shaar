@@ -1,7 +1,7 @@
 import { FC, Fragment, SetStateAction, useState } from "react";
 import logoIcon from "../../assets/images/icons/logo.svg";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { routes } from "../../constants/routes";
+import { routes, routes3 } from "../../constants/routes";
 import arrow from "../../assets/images/icons/arrow.svg";
 import sidebarBg from "../../assets/images/icons/sidebar-bg.svg";
 import kgIcon from "../../assets/images/icons/kg.svg";
@@ -36,7 +36,8 @@ const Header: FC = () => {
             <img src={logoIcon} alt="logo" className="min-w-24" />
           </Link>
           <ul className="flex sm:gap-4 md:gap-14 lg:gap-20 items-center flex-grow justify-center sm:ml-0 ml-[150px] font-bold">
-            {routes
+            {[...routes, ...routes3]
+              //@ts-ignore
               .filter((route) => route.label && !route.icon)
               .map(({ label, path }) => (
                 <li key={path}>
