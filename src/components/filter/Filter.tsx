@@ -96,7 +96,7 @@ const Filter: FC = () => {
           >
             <div
               className={clsx("w-[17px] h-[17px] bg-white animate-def", {
-                "bg-green-3": isFilterOpen,
+                "!bg-green-3": isFilterOpen,
               })}
               style={{
                 maskImage: `url(${filterIcon})`,
@@ -105,7 +105,6 @@ const Filter: FC = () => {
                 maskRepeat: "no-repeat",
               }}
             ></div>
-            {/* <img src={filterIcon} alt="filter" /> */}
             <span>Filter</span>
           </button>
           <div
