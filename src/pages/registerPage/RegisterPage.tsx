@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import bgImage from "../../assets/images/background.jpg";
 import arrowIcon from "../../assets/images/icons/arrow.svg";
 import cameraIcon from "../../assets/images/icons/camera.svg";
@@ -27,7 +27,7 @@ const RegisterPage: FC = () => {
   } = useForm<IRegisterForm>({ mode: "onTouched" });
   const { t } = useTranslation();
   const [_, setNotification] = useAtom(notificationAtom);
-  const [__, setIsAuth] = useAtom(isAuthAtom);
+  const [isAuth, setIsAuth] = useAtom(isAuthAtom);
 
   const { mutate: registerUser, isPending } = useMutation({
     mutationFn: authService.register,
@@ -72,6 +72,8 @@ const RegisterPage: FC = () => {
     form.append("ava", ava[0] || defaultAvaFile);
     registerUser(form);
   };
+
+  if (isAuth) return <Navigate to="/" />;
 
   return (
     <div

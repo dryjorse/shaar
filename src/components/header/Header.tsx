@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import logoIcon from "../../assets/images/icons/logo.svg";
 import { Link, NavLink } from "react-router-dom";
 import { routes } from "../../constants/routes";
@@ -25,7 +25,7 @@ const Header: FC = () => {
           {routes
             .filter((route) => route.icon)
             .map(({ path, label, icon }, key) => (
-              <>
+              <Fragment key={path}>
                 {!!key && (
                   <div className="mx-[14px] flex-[0_0_1px] self-stretch bg-white"></div>
                 )}
@@ -33,7 +33,7 @@ const Header: FC = () => {
                   <img src={icon} alt="nav" className="w-[26px] h-[26px]" />
                   <Link to={path}>{label}</Link>
                 </li>
-              </>
+              </Fragment>
             ))}
         </ul>
       </nav>

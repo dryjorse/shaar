@@ -13,3 +13,10 @@ export interface INotification {
   isAutoClose: boolean;
   type: "success" | "error" | "loading";
 }
+export type RatingsType = "all" | 5.0 | 4.5 | 4.0 | 3.5 | 3.0;
+export interface IBuildingsFilter {
+  categories: (number | string)[];
+  rating: RatingsType;
+  price: [number, number];
+  radius: [number, number];
+}
