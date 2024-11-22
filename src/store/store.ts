@@ -17,3 +17,4 @@ export const buildingsFilterAtom = atom<IBuildingsFilter>({
 });
 
 export const searchValueAtom = atom("");
+export const tourOnMapAtom = atom(0);

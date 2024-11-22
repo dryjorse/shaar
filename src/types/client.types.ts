@@ -20,3 +20,21 @@ export interface IBuildingsFilter {
   price: [number, number];
   radius: [number, number];
 }
+export interface IBuilding {
+  name: string;
+  images: string[];
+  descrtiption: string;
+  coordinates: { x: number; y: number };
+}
+export interface ITour {
+  id: number;
+  name: string;
+  description: string;
+  contacts: { tel: string };
+  schedule: [
+    {
+      time: { start: string; end: string };
+      location: IBuilding;
+    }
+  ];
+}
