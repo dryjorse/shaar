@@ -9,6 +9,8 @@ import WelcomePage from "../pages/welcomePage/WelcomePage";
 import favouritesIcon from "../assets/images/icons/favourites.svg";
 import profileIcon from "../assets/images/icons/profile2.svg";
 import BuildingsPage from "../pages/buildingsPage/BuildingsPage";
+import ToursPage from "../pages/toursPage/ToursPage";
+import TourPage from "../pages/tourPage/TourPage";
 
 export const routes = [
   { path: "/", element: <MainPage />, label: "home" },
@@ -34,6 +36,8 @@ export const routes2 = [
 ];
 
 export const routes3 = [
+  { path: "/tours", element: <ToursPage />, label: "tours" },
+  { path: "/tours/:id", element: <TourPage /> },
   { path: "/map", element: <MapPage />, label: "map" },
   { path: "/parking", element: <ParkingPage />, label: "parking" },
 ];

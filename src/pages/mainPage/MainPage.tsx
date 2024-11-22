@@ -73,7 +73,7 @@ const MainPage: FC = () => {
         </div>
         <div className="flex h-16 relative w-36 sm:w-44 shadow-md rounded-r-2xl">
           <h3 className=" bg-[#33BC7C] py-4 px-3 text-2xl sm:text-3xl font-bold rounded-s-xl w-[73px] rounded-r-[150px] z-10 text-white [text-shadow:_10px_10px_50px_#000]">
-            322
+            69
           </h3>
           <div
             className="absolute h-16 right-0 w-[80%] rounded-r-2xl"

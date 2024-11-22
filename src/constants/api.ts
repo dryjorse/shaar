@@ -6,9 +6,9 @@ export const $api = axios.create({ baseURL: API_URL });
 export const $apiPrivate = axios.create({ baseURL: API_URL });
 
 export enum apiConfig {
-  Register = "auth/users/",
-  Login = "auth/jwt/jwt/create/",
-  Refresh = "auth/jwt/jwt/refresh/",
+  Register = "auth/auth/users/",
+  Login = "auth/auth/jwt/jwt/create/",
+  Refresh = "auth/auth/jwt/jwt/refresh/",
   Categories = "place/categories/",
   Places = "place/places/",
   AirQuality = "air-quality/",
