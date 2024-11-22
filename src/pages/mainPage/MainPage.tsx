@@ -48,10 +48,10 @@ const MainPage: FC = () => {
 
   return (
     <div className="relative pt-50">
-      <div className="container flex gap-10">
+      <div className="container flex gap-3 sm:gap-10 absolute top-2 sm:relative sm:mt-9">
         <div className="flex h-16 relative w-36 sm:w-44 shadow-md rounded-r-2xl">
           <h3
-            className="bg-[#55B0FF] text-white py-4 px-2 text-2xl sm:text-3xl font-bold rounded-s-xl rounded-r-[150px] z-10 text-gray-800"
+            className="bg-[#55B0FF] text-white py-4 px-2 text-2xl sm:text-3xl font-bold rounded-s-xl rounded-r-[150px] z-[2] text-gray-800"
             style={{
               textShadow:
                 "0px 1px 2px 0px #0000001A, 2px 4px 4px 0px #00000017",
@@ -67,11 +67,12 @@ const MainPage: FC = () => {
             }}
           >
             <span>
-              <img src={weatherImage} alt="weather" className="-mt-3 -ms-4" />
+              <img src={weatherImage} alt="weather" className="-mt-2 -ms-4" />
             </span>
           </div>
         </div>
         <div className="flex h-16 relative w-36 sm:w-44 shadow-md rounded-r-2xl">
+
           <h3 className=" bg-[#33BC7C] py-4 px-3 text-2xl sm:text-3xl font-bold rounded-s-xl w-[73px] rounded-r-[150px] z-10 text-white [text-shadow:_10px_10px_50px_#000]">
             69
           </h3>
@@ -87,7 +88,7 @@ const MainPage: FC = () => {
               <img
                 src={airQualityImage}
                 alt="weater icon"
-                className="-mt-6 ms-4 sm:-mt-6 sm:ms-6"
+                className="-mt-3 ms-4 sm:-mt-9 sm:ms-6"
               />
             </span>
           </div>
@@ -95,19 +96,19 @@ const MainPage: FC = () => {
       </div>
       {allPlaces &&
         Object.entries(allPlaces).map(([ctg, places]) => (
-          <div key={ctg} className="container mt-[15px] mb-[19px]">
-            <h3 className="text-[#237B52] font-bold text-[36px]">{ctg}</h3>
+          <div key={ctg} className="sm:container mx-5 mt-[15px] mb-[19px]">
+            <h3 className="text-[#237B52] font-bold sm:text-[32px] text-[30px] md:text-[36px]">{ctg}</h3>
             <Swiper
               slidesPerView="auto"
               spaceBetween={14}
               className="mt-[26px]"
             >
               {places.map((place) => (
-                <SwiperSlide className="max-w-[154px] w-full ">
+                <SwiperSlide className="max-w-32 sm:max-w-[154px] w-full ">
                   <img
                     alt="place"
                     src={place.images?.[0].image}
-                    className="rounded-[25px] h-[157px] object-cover"
+                    className="rounded-[25px] h-32 sm:h-[157px] object-cover"
                   />
                 </SwiperSlide>
               ))}
