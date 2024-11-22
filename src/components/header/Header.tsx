@@ -93,6 +93,7 @@ const Header: FC = () => {
                 <li key={path} className="flex gap-[3px] items-center">
                   <img src={icon} alt="nav" className="w-[26px] h-[26px]" />
                   <Link to={path}>{label}</Link>
+                  <Link to={"/calendar"}>{"Events"}</Link>
                 </li>
               </Fragment>
             ))}
@@ -173,7 +174,7 @@ const Header: FC = () => {
         }}
         className={` overflow-hidden bg-[#149659]  fixed top-0 left-0 max-w-64 w-full h-screen p-4 flex flex-col bg-gray-900 transform  ${
           menuVisible ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-500 ease-in-out z-50 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900`}
+        } transition-transform duration-500 ease-in-out z-10 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900`}
       >
         <div className="flex flex-col justify-between h-full">
           <div className="flex items-center gap-4 mb-5 justify-between z-10">
@@ -269,6 +270,20 @@ const Header: FC = () => {
               </svg>
               Notifications
             </Link>
+            <Link className="flex ms-3 gap-2" to={"/calendar"}>
+              <svg
+                width="25"
+                height="30"
+                viewBox="0 0 30 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 8.66671V5.33337H3.33333V3.66671C3.33333 2.78265 3.68452 1.93481 4.30964 1.30968C4.93476 0.684563 5.78261 0.333374 6.66667 0.333374H16.6667V12L20.8333 9.50004L25 12V0.333374H26.6667C28.4167 0.333374 30 1.91671 30 3.66671V30.3334C30 32.0834 28.4167 33.6667 26.6667 33.6667H6.66667C4.91667 33.6667 3.33333 32.0834 3.33333 30.3334V28.6667H0V25.3334H3.33333V18.6667H0V15.3334H3.33333V8.66671H0ZM6.66667 15.3334H3.33333V18.6667H6.66667V15.3334ZM6.66667 8.66671V5.33337H3.33333V8.66671H6.66667ZM6.66667 28.6667V25.3334H3.33333V28.6667H6.66667Z"
+                  fill="#F0FFF8"
+                />
+              </svg>Calendar
+            </Link>
             <Link
               to={"/"}
               className="flex items-center p-2.5 rounded-lg hover:bg-gray-800 cursor-pointer gap-2.5"
@@ -290,6 +305,7 @@ const Header: FC = () => {
               </svg>
               Payment
             </Link>
+
             <hr />
             <Link
               to={"/"}
