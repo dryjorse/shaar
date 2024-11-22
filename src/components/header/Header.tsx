@@ -8,7 +8,6 @@ import kgIcon from "../../assets/images/icons/kg.svg";
 import ruIcon from "../../assets/images/icons/ru.svg";
 import enIcon from "../../assets/images/icons/en.svg";
 import home from "../../assets/images/icons/home.svg";
-import searchNav from "../../assets/images/icons/search-navbar.svg";
 import qrNavbar from "../../assets/images/icons/qrScan.svg";
 import mapNavbar from "../../assets/images/icons/map-navbar.svg";
 import parkingNav from "../../assets/images/icons/park-navbar.svg";
@@ -368,9 +367,7 @@ const Header: FC = () => {
               }`}
             />
           </Link>
-          <Link to={"/"}>
-            <img src={searchNav} alt="nav icon" className="max-w-9" />
-          </Link>
+
           <Link to={"/"}>
             <img src={qrNavbar} alt="nav icon" className="max-w-9" />
           </Link>

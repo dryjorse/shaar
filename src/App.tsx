@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import "./i18n";
-import MapLayout from "./layouts/mapLayouts/MapLayout";
+import MapLayout from "./layouts/mapLayout/MapLayout";
 
 function App() {
   const [_, setIsAuth] = useAtom(isAuthAtom);

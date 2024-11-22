@@ -9,7 +9,7 @@ const MapLayout: FC = () => {
     <>
       <Header />
       <main className="relative min-h-[calc(100vh-61px)] bg-gray-bg">
-        <Search />
+
         <Outlet />
       </main>
       <Footer />

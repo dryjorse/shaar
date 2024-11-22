@@ -10,7 +10,7 @@ const MainLayout: FC = () => {
     <>
       <Header />
       <main className="relative pt-[130px] min-h-[calc(100vh-61px)] bg-gray-bg">
-        <Search />ч
+        <Search />
         <Filter />
         <Outlet />
       </main>
