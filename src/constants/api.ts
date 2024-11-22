@@ -9,7 +9,7 @@ export enum apiConfig {
   Register = "auth/users/",
   Login = "auth/jwt/jwt/create/",
   Refresh = "auth/jwt/jwt/refresh/",
-  Categories = "categories/",
+  Categories = "place/categories/",
   Places = "place/places/",
   AirQuality = "air-quality/",
 }

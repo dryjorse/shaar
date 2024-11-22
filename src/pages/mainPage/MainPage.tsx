@@ -57,7 +57,7 @@ const MainPage: FC = () => {
                 "0px 1px 2px 0px #0000001A, 2px 4px 4px 0px #00000017",
             }}
           >
-            °10
+            °03
           </h3>
           <div
             className="absolute h-16 right-0 w-[80%] rounded-r-2xl"
