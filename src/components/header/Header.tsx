@@ -173,7 +173,7 @@ const Header: FC = () => {
         }}
         className={` overflow-hidden bg-[#149659]  fixed top-0 left-0 max-w-64 w-full h-screen p-4 flex flex-col bg-gray-900 transform  ${
           menuVisible ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-500 ease-in-out z-10 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900`}
+        } transition-transform duration-500 ease-in-out z-50 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900`}
       >
         <div className="flex flex-col justify-between h-full">
           <div className="flex items-center gap-4 mb-5 justify-between z-10">

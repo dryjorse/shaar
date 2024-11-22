@@ -62,7 +62,7 @@ const Filter: FC = () => {
     <>
       <div className="mx-[32px] mb-[15px] w-full h-[1px] bg-[#D9D9D9]"></div>
       <div className="sm:container flex flex-col gap-y-3 sm:gap-y-0 sm:flex-row justify-between items-center ">
-        <ul className="sm:flex-wrap lg:flex-nowrap max-w-[100vw] mx-2  gap-[12px]  flex overflow-x-scroll sm:overflow-hidden">
+        <ul className="sm:flex-wrap lg:flex-nowrap max-w-[95vw]   gap-[12px]  flex overflow-x-scroll sm:overflow-hidden">
           <li>
             <Link
               to="/"
@@ -112,7 +112,7 @@ const Filter: FC = () => {
           <button
             onClick={() => setIsFilterOpen((prev) => !prev)}
             className={clsx(
-              "flex btn bg-green-3 rounded-[11px] px-[21px]  py-[14px] shadow-hidden gap-[16px] items-center text-[14px] font-bold !shadow-[1px_1px_20px_rgba(0,0,0,0.5)] hover:!shadow-[1px_1px_20px_rgba(0,0,0,0.5)]",
+              "flex justify-center btn bg-green-3 rounded-[11px] px-[20px]  py-[14px] shadow-hidden gap-[16px] items-center text-[14px] font-bold !shadow-[1px_1px_20px_rgba(0,0,0,0.5)] hover:!shadow-[1px_1px_20px_rgba(0,0,0,0.5)]",
               {
                 "relative sm:relative": !isFilterOpen,
                 "absolute top-[-50px] sm:top-0 sm:left-0 left-6 z-20 sm:relative":
@@ -138,7 +138,7 @@ const Filter: FC = () => {
             {/* Для экрана >= sm */}
             <div
               className={clsx(
-                "w-[17px] h-[17px] bg-white animate-def hidden sm:block",
+                "w-[17px] h-[17px] bg-white animate-def hidden sm:block ",
                 { "!bg-green-3": isFilterOpen }
               )}
               style={{
@@ -148,7 +148,7 @@ const Filter: FC = () => {
                 maskRepeat: "no-repeat",
               }}
             ></div>
-            <span className="sm:block hidden">Filter</span>
+            <span className="sm:block hidden ">Filter</span>
           </button>
 
           <div
