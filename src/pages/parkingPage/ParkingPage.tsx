@@ -32,7 +32,7 @@ const ParkingPage: FC = React.memo(() => {
   const [controlsVisible, setControlsVisible] = useState(true);
 
   let userRole = "admin"; // ADMINKA
-
+  const center = { lat: 42.826434, lng: 74.548867 };
   const toggleControls = () => {
     setControlsVisible(!controlsVisible);
   };
@@ -41,35 +41,38 @@ const ParkingPage: FC = React.memo(() => {
     geocoder.current = new google.maps.Geocoder();
   };
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const userCoords = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          setUserLocation(userCoords);
-          if (mapRef.current) {
-            mapRef.current.panTo(userCoords);
-          }
-        },
-        () => {
-          console.warn(
-            "Геолокация отклонена пользователем или произошла ошибка."
-          );
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0,
-        }
-      );
+  const maki = [
+    { lat: 42.825977, lng: 74.548159 },
+    { lat: 42.82601, lng: 74.548265 },
+    { lat: 42.826164, lng: 74.548044 },
+    { lat: 42.826288, lng: 74.54796 },
+    { lat: 42.82649, lng: 74.547778 },
+    { lat: 42.827805271089034, lng: 74.55088415973017 },
+    { lat: 42.82782494240816, lng: 74.55095657937358 },
+    { lat: 42.82784264659002, lng: 74.55102229349444 },
+    { lat: 42.827854449375096, lng: 74.55109068982432 },
+  ];
 
-      return () => {
-        navigator.geolocation.clearWatch(watchId);
-      };
-    }
+  const poly = [
+    [
+      { lat: 42.825880796248526, lng: 74.54850540479502 },
+      { lat: 42.82575292854091, lng: 74.54815403541407 },
+      { lat: 42.826642095432526, lng: 74.54756931384883 },
+      { lat: 42.82674438814841, lng: 74.5478160770782 },
+    ],
+    [
+      { lat: 42.82782199171068, lng: 74.55082112781832 },
+
+      { lat: 42.82769019374678, lng: 74.55092707507441 },
+
+      { lat: 42.82782494240816, lng: 74.55124625794718 },
+
+      { lat: 42.82789969336371, lng: 74.55111751191447 },
+    ]
+  ];
+
+  useEffect(() => {
+    setUserLocation(center);
   }, []);
 
   const handleOverlayComplete = (
@@ -241,7 +244,7 @@ const ParkingPage: FC = React.memo(() => {
             />
           )}
 
-          {markers.map((marker, index) => (
+          {maki.map((marker, index) => (
             <Marker
               key={index}
               position={marker}
@@ -252,7 +255,7 @@ const ParkingPage: FC = React.memo(() => {
               }
             />
           ))}
-          {polygons.map((polygon, index) => (
+          {poly.map((polygon, index) => (
             <Polygon
               key={index}
               paths={polygon}
@@ -294,7 +297,7 @@ const ParkingPage: FC = React.memo(() => {
         </GoogleMap>
       </LoadScript>
       {userRole === "admin" && (
-        <div className="top-0 absolute bg-green-white rounded-xl">
+        <div className="top-20 absolute bg-green-white rounded-xl">
           <button
             onClick={toggleControls}
             className="bg-gray-500 text-white px-5 py-2 rounded-xl mb-2"
